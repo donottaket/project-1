@@ -1,0 +1,5 @@
+rootProject.name = 'project-1'
+
+include 'producer'
+include 'batch-message-consumer'
+include 'single-message-consumer'

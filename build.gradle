@@ -1,0 +1,22 @@
+subprojects {
+    group = 'kz.yandex_practicum.kafka'
+
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_23
+        targetCompatibility = JavaVersion.VERSION_23
+    }
+
+    compileJava {
+        options.encoding = "UTF-8"
+        sourceCompatibility = 23
+        targetCompatibility = 23
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}

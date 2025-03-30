@@ -1,0 +1,19 @@
+dependencies {
+    implementation('org.apache.kafka:kafka-clients:4.0.0') {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes 'Main-Class': 'kz.yandex_practicum.kafka.single_message_consumer.SingleMessageConsumerLauncher'
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

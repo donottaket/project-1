@@ -1,0 +1,11 @@
+Команда консоли, которой был создан топик
+docker exec -it kafka-broker-0 sh -c "kafka-topics.sh --create --topic project-1-topic --bootstrap-server kafka-broker-0:9092,kafka-broker-1:9092,kafka-broker-2:9092 --partitions 3 --replication-factor 2"
+
+Команда консоли для просмотра информации о топике
+docker exec -it kafka-broker-0 sh -c "kafka-topics.sh --describe --topic project-1-topic --bootstrap-server kafka-broker-0:9092,kafka-broker-1:9092,kafka-broker-2:9092"
+
+Информация о топике
+Topic: project-1-topic  TopicId: TgEBFpoeS82QVXxRw5jmmQ PartitionCount: 3       ReplicationFactor: 2    Configs:
+        Topic: project-1-topic  Partition: 0    Leader: 1       Replicas: 1,2   Isr: 1,2
+        Topic: project-1-topic  Partition: 1    Leader: 2       Replicas: 2,3   Isr: 2,3
+        Topic: project-1-topic  Partition: 2    Leader: 3       Replicas: 3,1   Isr: 3,1

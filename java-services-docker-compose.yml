@@ -1,0 +1,45 @@
+# Docker Compose файл для запуска Java сервисов
+
+networks:
+  kafka-net:
+    driver: bridge
+
+services:
+
+  # Consumer сервис
+  batch-message-consumer:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: batch-message-consumer
+    networks:
+      - kafka-net
+    deploy:
+      replicas: 2 # Количество реплик для BatchMessageConsumer сервиса
+
+  # Consumer сервис
+  single-message-consumer:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: single-message-consumer
+    networks:
+      - kafka-net
+    deploy:
+      replicas: 2 # Количество реплик для SingleMessageConsumer сервиса
+
+  # Producer сервис
+  producer:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: producer
+    container_name: producer
+    networks:
+      - kafka-net

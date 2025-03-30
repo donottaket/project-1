@@ -2,12 +2,12 @@
 
 # Общие переменные окружения
 x-common-env: &common-env
-  KAFKA_ENABLE_KRAFT: "yes"
-  KAFKA_CFG_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
-  KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: "0@kafka-controller-0:9093"
-  KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT"
-  ALLOW_PLAINTEXT_LISTENER: "yes"
-  KAFKA_KRAFT_CLUSTER_ID: "JWo_Y2_0Qxejg9cntdQRpw"
+  KAFKA_ENABLE_KRAFT: "yes" # Включаем KRaft режим
+  KAFKA_CFG_CONTROLLER_LISTENER_NAMES: "CONTROLLER" # Имя слушателя для контроллера
+  KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: "0@kafka-controller-0:9093" # Кворум контроллеров
+  KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT" # Карта протоколов безопасности для слушателей
+  ALLOW_PLAINTEXT_LISTENER: "yes" # Разрешаем использование незащищенного слушателя
+  KAFKA_KRAFT_CLUSTER_ID: "JWo_Y2_0Qxejg9cntdQRpw" # Идентификатор кластера KRaft
 
 networks:
   kafka-net:
@@ -23,9 +23,9 @@ services:
       - kafka-net
     environment:
       <<: *common-env
-      KAFKA_CFG_NODE_ID: 0
-      KAFKA_CFG_PROCESS_ROLES: controller
-      KAFKA_CFG_LISTENERS: "CONTROLLER://0.0.0.0:9093"
+      KAFKA_CFG_NODE_ID: 0 # Идентификатор узла контроллера
+      KAFKA_CFG_PROCESS_ROLES: controller # Роль процесса контроллера
+      KAFKA_CFG_LISTENERS: "CONTROLLER://0.0.0.0:9093" # Слушатель для контроллера
 
   # Брокер 0
   kafka-broker-0:
@@ -39,10 +39,10 @@ services:
       - "9094:9094"
     environment:
       <<: *common-env
-      KAFKA_CFG_NODE_ID: 1
-      KAFKA_CFG_PROCESS_ROLES: broker
-      KAFKA_CFG_LISTENERS: "PLAINTEXT://0.0.0.0:9092,EXTERNAL://:9094"
-      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-broker-0:9092,EXTERNAL://localhost:9094"
+      KAFKA_CFG_NODE_ID: 1 # Идентификатор узла брокера
+      KAFKA_CFG_PROCESS_ROLES: broker # Роль процесса брокера
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://0.0.0.0:9092,EXTERNAL://:9094" # Слушатели для брокера
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-broker-0:9092,EXTERNAL://localhost:9094" # Рекламируемые слушатели для брокера
 
   # Брокер 1
   kafka-broker-1:
@@ -56,10 +56,10 @@ services:
       - "9095:9095"
     environment:
       <<: *common-env
-      KAFKA_CFG_NODE_ID: 2
-      KAFKA_CFG_PROCESS_ROLES: broker
-      KAFKA_CFG_LISTENERS: "PLAINTEXT://0.0.0.0:9092,EXTERNAL://:9095"
-      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-broker-1:9092,EXTERNAL://localhost:9095"
+      KAFKA_CFG_NODE_ID: 2 # Идентификатор узла брокера
+      KAFKA_CFG_PROCESS_ROLES: broker # Роль процесса брокера
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://0.0.0.0:9092,EXTERNAL://:9095" # Слушатели для брокера
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-broker-1:9092,EXTERNAL://localhost:9095" # Рекламируемые слушатели для брокера
 
   # Брокер 2
   kafka-broker-2:
@@ -73,10 +73,10 @@ services:
       - "9096:9096"
     environment:
       <<: *common-env
-      KAFKA_CFG_NODE_ID: 3
-      KAFKA_CFG_PROCESS_ROLES: broker
-      KAFKA_CFG_LISTENERS: "PLAINTEXT://0.0.0.0:9092,EXTERNAL://:9096"
-      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-broker-2:9092,EXTERNAL://localhost:9096"
+      KAFKA_CFG_NODE_ID: 3 # Идентификатор узла брокера
+      KAFKA_CFG_PROCESS_ROLES: broker # Роль процесса брокера
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://0.0.0.0:9092,EXTERNAL://:9096" # Слушатели для брокера
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-broker-2:9092,EXTERNAL://localhost:9096" # Рекламируемые слушатели для брокера
 
   # UI для Kafka
   kafka-ui:
